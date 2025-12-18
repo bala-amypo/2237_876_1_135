@@ -1,5 +1,7 @@
 package com.example.demo.entiry;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 
 @Entity
