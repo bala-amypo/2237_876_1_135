@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 public class User
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullName;
 
@@ -13,8 +14,6 @@ public class User
     private String email;
     private String password;
     private String role;
-
-    @
     private LocalDate createdAt;
 
     public Long getId(){
@@ -58,4 +57,12 @@ public class User
     public void setCreatedAt(LocalDate createdAt){
         this.createdAt = createdAt;
     }
+
+    public User(String fullName,String email,String password,String role){
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+    public User (){}
 }
