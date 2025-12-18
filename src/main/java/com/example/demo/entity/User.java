@@ -13,32 +13,42 @@ public class User
     public Long getId(){
         return id;
     }
-    public String getFullName(){
-        return fullName;
-    }
-    public String getEmail(){
-        return email;
-    }
-    public String getPassword(){
-        return password;
-    }
-    public String getRole(){
-        return role;
-    }
-
     public void setId(Long id){
         this.id = id;
+    }
+
+    public String getFullName(){
+        return fullName;
     }
     public void setFullName(String fullName){
         this. = fullName;
     }
-    public void setId(Long id){
-        this.id = id;
+    
+    public void setEmail(String email){
+        this.email = email;
     }
-    public void setId(Long id){
-        this.id = id;
+    public String getEmail(){
+        return email;
     }
-    public void setId(Long id){
-        this.id = id;
+
+    public String getPassword(){
+        return password;
+    }
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public String getRole(){
+        return role;
+    }
+    public void setRole(String role){
+        this.role = role;
+    }
+
+    public LocalDate getCreatedAt(){
+        return createdAt;
+    }
+    public void setCreatedAt(LocalDate createdAt){
+        this.createdAt = createdAt;
     }
 }
