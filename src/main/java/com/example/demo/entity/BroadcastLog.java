@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.persistence.*;
 
-public class Subscription
+public class BroadcastLog
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,11 +44,11 @@ public class Subscription
     public void setSentAt(LocalDate sentAt) {
         this.sentAt = sentAt;
     }
-    public Subscription(ManyToOne eventUpdate, ManyToOne subscriber, String deliveryStatus, LocalDate sentAt) {
+    public BroadcastLog(ManyToOne eventUpdate, ManyToOne subscriber, String deliveryStatus, LocalDate sentAt) {
         this.eventUpdate = eventUpdate;
         this.subscriber = subscriber;
         this.deliveryStatus = deliveryStatus;
         this.sentAt = sentAt;
     }
-    public Subscription() {}
+    public BroadcastLog() {}
 }

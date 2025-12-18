@@ -29,7 +29,7 @@ public class User
         return fullName;
     }
     public void setFullName(String fullName){
-        this. = fullName;
+        this.fullName = fullName;
     }
 
     public void setEmail(String email){
