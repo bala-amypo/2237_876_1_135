@@ -1,13 +1,20 @@
 package com.example.demo.entiry;
 
+import jakarta.persistence.*;
+
 @Entity
 public class User
 {
+    @Id
     private Long id;
     private String fullName;
+
+    @Column(unique = true)
     private String email;
     private String password;
     private String role;
+
+    @
     private LocalDate createdAt;
 
     public Long getId(){
@@ -23,7 +30,7 @@ public class User
     public void setFullName(String fullName){
         this. = fullName;
     }
-    
+
     public void setEmail(String email){
         this.email = email;
     }
