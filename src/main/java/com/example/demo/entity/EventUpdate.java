@@ -21,6 +21,7 @@ public class EventUpdate {
     private String updateType;
 
     private Timestamp postedAt;
+    private LocalDateTime timestamp;
 
     @OneToMany(mappedBy = "eventUpdate")
     private List<BroadcastLog> broadcastLogs;
@@ -94,6 +95,5 @@ public class EventUpdate {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
-
 
 }
