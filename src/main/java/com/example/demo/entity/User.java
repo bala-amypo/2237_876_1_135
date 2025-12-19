@@ -1,70 +1,58 @@
-package com.example.demo.entiry;
-
-import java.time.LocalDate;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
-public class User
-{
+@Table(name = "users")
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String fullName;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
+
     private String password;
+
     private String role;
-    private LocalDate createdAt;
 
-    public Long getId(){
-        return id;
-    }
-    public void setId(Long id){
-        this.id = id;
-    }
+    private Timestamp createdAt;
 
-    public String getFullName(){
-        return fullName;
-    }
-    public void setFullName(String fullName){
-        this.fullName = fullName;
-    }
+    @OneToMany(mappedBy = "publisher")
+    private List<Event> events;
 
-    public void setEmail(String email){
-        this.email = email;
-    }
-    public String getEmail(){
-        return email;
-    }
+    @OneToMany(mappedBy = "user")
+    private List<Subscription> subscriptions;
 
-    public String getPassword(){
-        return password;
-    }
-    public void setPassword(String password){
-        this.password = password;
-    }
+    @OneToMany(mappedBy = "subscriber")
+    private List<BroadcastLog> broadcastLogs;
 
-    public String getRole(){
-        return role;
-    }
-    public void setRole(String role){
-        this.role = role;
-    }
+    public User() {}
 
-    public LocalDate getCreatedAt(){
-        return createdAt;
-    }
-    public void setCreatedAt(LocalDate createdAt){
-        this.createdAt = createdAt;
-    }
-
-    public User(String fullName,String email,String password,String role){
+    public User(String fullName, String email, String password, String role) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.role = role;
     }
-    public User (){}
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+    }
+
+    public Long getId() { return id; }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 }

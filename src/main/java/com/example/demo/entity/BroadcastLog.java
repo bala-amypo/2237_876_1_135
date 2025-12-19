@@ -1,54 +1,38 @@
 package com.example.demo.entity;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.*;
+import java.sql.Timestamp;
 
-public class BroadcastLog
-{
+@Entity
+@Table(name = "broadcast_logs")
+public class BroadcastLog {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private ManyToOne eventUpdate;
-    private ManyToOne subscriber;
-    private String deliveryStatus;
-    private LocalDate sentAt;
-    
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public ManyToOne getEventUpdate() {
-        return eventUpdate;
-    }
-    public void setEventUpdate(ManyToOne eventUpdate) {
-        this.eventUpdate = eventUpdate;
-    }
-    public ManyToOne getSubscriber() {
-        return subscriber;
-    }
-    public void setSubscriber(ManyToOne subscriber) {
-        this.subscriber = subscriber;
-    }
-    public String getDeliveryStatus() {
-        return deliveryStatus;
-    }
-    public void setDeliveryStatus(String deliveryStatus) {
-        this.deliveryStatus = deliveryStatus;
-    }
-    public LocalDate getSentAt() {
-        return sentAt;
-    }
-    public void setSentAt(LocalDate sentAt) {
-        this.sentAt = sentAt;
-    }
-    public BroadcastLog(ManyToOne eventUpdate, ManyToOne subscriber, String deliveryStatus, LocalDate sentAt) {
-        this.eventUpdate = eventUpdate;
-        this.subscriber = subscriber;
-        this.deliveryStatus = deliveryStatus;
-        this.sentAt = sentAt;
-    }
+
+    @ManyToOne
+    @JoinColumn(name = "event_update_id")
+    private EventUpdate eventUpdate;
+
+    @ManyToOne
+    @JoinColumn(name = "subscriber_id")
+    private User subscriber;
+
+    private String deliveryStatus = "SENT";
+
+    private Timestamp sentAt;
+
     public BroadcastLog() {}
+
+    public BroadcastLog(EventUpdate eventUpdate, User subscriber, String deliveryStatus) {
+        this.eventUpdate = eventUpdate;
+        this.subscriber = subscriber;
+        this.deliveryStatus = deliveryStatus;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.sentAt = new Timestamp(System.currentTimeMillis());
+    }
 }
