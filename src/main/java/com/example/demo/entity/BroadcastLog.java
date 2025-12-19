@@ -35,12 +35,44 @@ public class BroadcastLog {
     protected void onCreate() {
         this.sentAt = new Timestamp(System.currentTimeMillis());
     }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public EventUpdate getEventUpdate() {
+        return eventUpdate;
+    }
+
+    public void setEventUpdate(EventUpdate eventUpdate) {
+        this.eventUpdate = eventUpdate;
+    }
+
     public User getSubscriber() {
         return subscriber;
     }
 
+    public void setSubscriber(User subscriber) {
+        this.subscriber = subscriber;
+    }
+
+    public String getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
     public void setDeliveryStatus(String deliveryStatus) {
         this.deliveryStatus = deliveryStatus;
+    }
+
+    public Timestamp getSentAt() {
+        return sentAt;
+    }
+
+    public void setSentAt(Timestamp sentAt) {
+        this.sentAt = sentAt;
     }
 
 }
