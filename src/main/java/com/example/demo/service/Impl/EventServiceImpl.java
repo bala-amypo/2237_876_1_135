@@ -35,7 +35,7 @@ public class EventServiceImpl implements EventService {
         Event event = getEventById(id);
 
         event.setIsActive(updated.getIsActive());
-        return eventRepository.save(event);`
+        return eventRepository.save(event);
     }
 
     @Override
