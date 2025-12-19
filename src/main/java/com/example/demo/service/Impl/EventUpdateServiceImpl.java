@@ -37,4 +37,17 @@ public class EventUpdateServiceImpl implements EventUpdateService {
     public List<EventUpdate> getUpdatesForEvent(Long eventId) {
         return eventUpdateRepository.findByEventIdOrderByTimestampAsc(eventId);
     }
+
+    @Override
+    public EventUpdate getUpdateById(Long id) {
+        return eventUpdateRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Event update not found"));
+    }
+    
+    @Override
+    public EventUpdate publishUpdate(EventUpdate update) {
+        update.setTimestamp(java.time.LocalDateTime.now());
+        return eventUpdateRepository.save(update);
+    }
+
 }

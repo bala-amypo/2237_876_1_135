@@ -62,4 +62,15 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public boolean checkSubscription(Long userId, Long eventId) {
         return subscriptionRepository.existsByUserIdAndEventId(userId, eventId);
     }
+
+    @Override
+    public List<Subscription> getUserSubscriptions(Long userId) {
+        return subscriptionRepository.findByUserId(userId);
+    }
+    @Override
+    public boolean isSubscribed(Long userId, Long eventId) {
+        return subscriptionRepository
+                .existsByUserIdAndEventId(userId, eventId);
+    }
+
 }

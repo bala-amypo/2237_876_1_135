@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -84,5 +85,15 @@ public class EventUpdate {
     public void setBroadcastLogs(List<BroadcastLog> broadcastLogs) {
         this.broadcastLogs = broadcastLogs;
     }
+
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
 
 }
