@@ -18,12 +18,13 @@ public class EventUpdateServiceImpl implements EventUpdateService {
     private final EventRepository eventRepository;
     private final BroadcastService broadcastService;
 
-    public EventUpdateServiceImpl(EventUpdateRepository updateRepository,
-                                  EventRepository eventRepository,
-                                  BroadcastService broadcastService) {
-        this.updateRepository = updateRepository;
-        this.eventRepository = eventRepository;
+    public EventUpdateServiceImpl(BroadcastService broadcastService) {
         this.broadcastService = broadcastService;
+    }
+    public EventServiceImpl(EventRepository eventRepository,
+                            UserRepository userRepository) {
+        this.eventRepository = eventRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
