@@ -37,11 +37,52 @@ public class EventUpdate {
         this.postedAt = new Timestamp(System.currentTimeMillis());
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public Event getEvent() { return event; }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public String getUpdateContent() {
+        return updateContent;
+    }
+
+    public void setUpdateContent(String updateContent) {
+        this.updateContent = updateContent;
+    }
+
+    public String getUpdateType() {
+        return updateType;
+    }
+
+    public void setUpdateType(String updateType) {
+        this.updateType = updateType;
+    }
+
+    public Timestamp getPostedAt() {
+        return postedAt;
+    }
+
+    public void setPostedAt(Timestamp postedAt) {
+        this.postedAt = postedAt;
+    }
+
+    public List<BroadcastLog> getBroadcastLogs() {
+        return broadcastLogs;
+    }
+
+    public void setBroadcastLogs(List<BroadcastLog> broadcastLogs) {
+        this.broadcastLogs = broadcastLogs;
     }
 
 }
