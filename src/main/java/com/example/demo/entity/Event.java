@@ -143,10 +143,6 @@ public class Event {
         return lastUpdatedAt;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        lastUpdatedAt = LocalDateTime.now();
-    }
 
     @PreUpdate
     protected void onUpdate() {
