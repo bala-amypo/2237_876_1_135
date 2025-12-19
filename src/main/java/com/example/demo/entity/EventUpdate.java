@@ -38,6 +38,7 @@ public class EventUpdate {
     }
 
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
     public Event getEvent() { return event; }
     public void setEvent(Event event) {
         this.event = event;

@@ -48,6 +48,7 @@ public class Event {
     }
 
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
     public Boolean getIsActive() { return isActive; }
     public void setIsActive(Boolean active) { isActive = active; }
 
