@@ -8,6 +8,16 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
+    private String secret;
+    private int expiration;
+
+    public JwtUtil() {}
+
+    public JwtUtil(String secret, int expiration) {
+        this.secret = secret;
+        this.expiration = expiration;
+    }
+
     private final String secret = "secret-key-demo";
     private final long validityInMs = 3600000; // 1 hour
 
