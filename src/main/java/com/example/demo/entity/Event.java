@@ -127,4 +127,30 @@ public class Event {
         this.subscriptions = subscriptions;
     }
 
+    private boolean active = true;
+    private LocalDateTime lastUpdatedAt;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public LocalDateTime getLastUpdatedAt() {
+        return lastUpdatedAt;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        lastUpdatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        lastUpdatedAt = LocalDateTime.now();
+    }
+
+
 }

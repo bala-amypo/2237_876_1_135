@@ -11,4 +11,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findByIsActiveTrueAndCategory(String category);
 
     List<Event> findByPublisherId(Long publisherId);
+
+    List<Event> findByIsActiveTrueAndLocationContainingIgnoreCase(String location);
+
 }
