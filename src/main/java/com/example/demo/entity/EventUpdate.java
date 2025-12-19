@@ -39,4 +39,8 @@ public class EventUpdate {
 
     public Long getId() { return id; }
     public Event getEvent() { return event; }
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
 }
