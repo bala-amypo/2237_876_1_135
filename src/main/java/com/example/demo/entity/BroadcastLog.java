@@ -35,4 +35,12 @@ public class BroadcastLog {
     protected void onCreate() {
         this.sentAt = new Timestamp(System.currentTimeMillis());
     }
+    public User getSubscriber() {
+        return subscriber;
+    }
+
+    public void setDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+    }
+
 }

@@ -34,5 +34,15 @@ public class Subscription {
         this.subscribedAt = new Timestamp(System.currentTimeMillis());
     }
 
-    public Long getId() { return id; }
+    public Long getId() { 
+        return id; 
+    }
+    public User getUser() {
+        return user;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
 }

@@ -50,4 +50,13 @@ public class Event {
     public Long getId() { return id; }
     public Boolean getIsActive() { return isActive; }
     public void setIsActive(Boolean active) { isActive = active; }
+
+    public User getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(User publisher) {
+        this.publisher = publisher;
+    }
+
 }
