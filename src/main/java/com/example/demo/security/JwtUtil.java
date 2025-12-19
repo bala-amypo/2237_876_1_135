@@ -1,6 +1,7 @@
 package com.example.demo.security;
 
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -8,10 +9,21 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    
+    private final String secret;
+    private final long validityInMs;
 
-    private final String secret = "secret-key-demo";
-    private final long validityInMs = 3600000; // 1 hour
+    public JwtUtil(
+            @Value("${jwt.secret}") String secret,
+            @Value("${jwt.expiration}") long validityInMs
+    ) {
+        this.secret = secret;
+        this.validityInMs = validityInMs;
+    }
+
+    public JwtUtil(String secret, int validityInMs) {
+        this.secret = secret;
+        this.validityInMs = validityInMs;
+    }
 
     public String generateToken(Long userId, String email, String role) {
         Claims claims = Jwts.claims().setSubject(email);
@@ -31,7 +43,9 @@ public class JwtUtil {
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             return false;
