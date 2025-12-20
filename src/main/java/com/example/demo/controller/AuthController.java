@@ -45,25 +45,36 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody LoginRequest request) {
+public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 
-        User user = userService.findByEmail(request.getEmail());
+    User user = userService.findByEmail(request.getEmail());
 
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("Invalid credentials");
-        }
+    if (user == null) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("error", "Invalid credentials"));
+    }
 
-        String token = jwtUtil.generateToken(
-                user.getId(),
-                user.getEmail(),
-                user.getRole().name()  
-        );
+    if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("error", "Invalid credentials"));
+    }
 
-        return Map.of(
+    String token = jwtUtil.generateToken(
+            user.getId(),
+            user.getEmail(),
+            user.getRole().name()
+    );
+
+    return ResponseEntity.ok(
+            Map.of(
                 "token", token,
                 "userId", user.getId(),
                 "email", user.getEmail(),
                 "role", user.getRole().name()
-        );
-    }
+            )
+    );
+}
+
 }
