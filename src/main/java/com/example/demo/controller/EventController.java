@@ -1,7 +1,7 @@
-package com.example.project.controller;
+package com.example.demo.controller;
 
-import com.example.project.entity.Event;
-import com.example.project.service.EventService;
+import com.example.demo.entity.Event;
+import com.example.demo.service.EventService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

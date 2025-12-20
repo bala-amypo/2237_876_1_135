@@ -1,7 +1,7 @@
-package com.example.project.controller;
+package com.example.demo.controller;
 
-import com.example.project.entity.Subscription;
-import com.example.project.service.SubscriptionService;
+import com.example.demo.entity.Subscription;
+import com.example.demo.service.SubscriptionService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

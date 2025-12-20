@@ -1,7 +1,7 @@
-package com.example.project.controller;
+package com.example.demo.controller;
 
-import com.example.project.entity.BroadcastLog;
-import com.example.project.service.BroadcastService;
+import com.example.demo.entity.BroadcastLog;
+import com.example.demo.service.BroadcastService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
