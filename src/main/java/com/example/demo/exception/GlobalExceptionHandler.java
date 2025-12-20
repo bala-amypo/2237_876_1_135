@@ -1,34 +1,29 @@
 package com.example.demo.exception;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.example.demo.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
-public class GlobalExceptionHandler {
 
+@RestControllerAdvice
+public class GlobalExceptionHandler 
+{
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ApiResponse> handleNotFound(ResourceNotFoundException ex) {
-        return new ResponseEntity<>(
-                new ApiResponse(false, ex.getMessage()),
-                HttpStatus.NOT_FOUND
-        );
+    public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(),
+        HttpStatus.NOT_FOUND);
     }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ApiResponse> handleBadRequest(IllegalArgumentException ex) {
-        return new ResponseEntity<>(
-                new ApiResponse(false, ex.getMessage()),
-                HttpStatus.BAD_REQUEST
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationErrors(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+            errors.put(error.getField(),
+            error.getDefaultMessage())
         );
-    }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse> handleGeneral(Exception ex) {
-        return new ResponseEntity<>(
-                new ApiResponse(false, "Internal server error"),
-                HttpStatus.INTERNAL_SERVER_ERROR
-        );
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
