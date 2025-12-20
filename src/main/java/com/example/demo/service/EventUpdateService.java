@@ -5,11 +5,11 @@ import java.util.List;
 
 public interface EventUpdateService {
 
-    EventUpdate createUpdate(Long eventId, EventUpdate update);
-
     EventUpdate publishUpdate(EventUpdate update);
 
     List<EventUpdate> getUpdatesForEvent(Long eventId);
 
     EventUpdate getUpdateById(Long id);
+
+    EventUpdate createUpdate(Long eventId, EventUpdate update);
 }
