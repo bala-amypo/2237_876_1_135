@@ -8,7 +8,9 @@ import jakarta.persistence.*;
 public class Subscription {
     @Id
     private Long id;
+    @ManyToOne
     private User user;
+    @ManyToOne
     private Event event;
     private Instant subscribedAt;
 
@@ -25,4 +27,14 @@ public class Subscription {
     public void setEvent(Event event) { this.event = event; }
 
     public Instant getSubscribedAt() { return subscribedAt; }
+
+    public Subscription(User user, Event event) {
+        this.user = user;
+        this.event = event;
+    }
+
+    public Subscription() {
+    }
+
+    
 }

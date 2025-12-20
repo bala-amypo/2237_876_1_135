@@ -8,19 +8,21 @@ import jakarta.persistence.*;
 public class Event {
     @Id
     private Long id;
+    @ManyToOne
     private User publisher;
     private String title;
     private String description;
     private String location;
     private String category;
-    private boolean active;
+    private boolean isActive;
     private Instant createdAt;
     private Instant lastUpdatedAt;
+
 
     public void onCreate() {
         this.createdAt = Instant.now();
         this.lastUpdatedAt = Instant.now();
-        this.active = true;
+        this.isActive = true;
     }
 
     public void onUpdate() {
@@ -45,8 +47,8 @@ public class Event {
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
 
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    public boolean isActive() { return isActive; }
+    public void setActive(boolean isActive) { this.isActive = isActive; }
 
     public Instant getCreatedAt() { return createdAt; }
     public Instant getLastUpdatedAt() { return lastUpdatedAt; }

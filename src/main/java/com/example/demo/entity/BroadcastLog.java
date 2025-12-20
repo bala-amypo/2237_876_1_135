@@ -4,10 +4,11 @@ import jakarta.persistence.*;
 
 @Entity
 public class BroadcastLog {
-
     @Id
     private Long id;
+    @ManyToOne
     private EventUpdate eventUpdate;
+    @ManyToOne
     private User subscriber;
     private DeliveryStatus deliveryStatus = DeliveryStatus.SENT;
 
@@ -24,4 +25,12 @@ public class BroadcastLog {
     public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
         this.deliveryStatus = deliveryStatus;
     }
+    public BroadcastLog(EventUpdate eventUpdate, User subscriber, DeliveryStatus deliveryStatus) {
+        this.eventUpdate = eventUpdate;
+        this.subscriber = subscriber;
+        this.deliveryStatus = deliveryStatus;
+    }
+    public BroadcastLog() {
+    }
+    
 }
