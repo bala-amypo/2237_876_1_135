@@ -1,7 +1,11 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
+
+@Entity
 public class BroadcastLog {
 
+    @Id
     private Long id;
     private EventUpdate eventUpdate;
     private User subscriber;
