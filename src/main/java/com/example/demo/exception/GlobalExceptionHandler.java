@@ -26,4 +26,15 @@ public class GlobalExceptionHandler
         );
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<Map<String, Object>> handleResponseStatus(
+            ResponseStatusException ex) {
+
+        return ResponseEntity
+                .status(ex.getStatusCode())
+                .body(Map.of(
+                        "status", ex.getStatusCode().value(),
+                        "error", ex.getReason()
+                ));
+    }
 }
