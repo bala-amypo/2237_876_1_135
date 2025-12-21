@@ -8,7 +8,6 @@ import com.example.demo.repository.EventRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.EventService;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
@@ -26,12 +25,11 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event createEvent(Event event) {
+        if (event.getPublisher() == null || event.getPublisher().getId() == null) {
+            throw new IllegalArgumentException("Only PUBLISHER or ADMIN can create events");
+        }
 
-        String email = SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getName();
-
-        User publisher = userRepository.findByEmail(email)
+        User publisher = userRepository.findById(event.getPublisher().getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         if (!(publisher.getRole() == Role.PUBLISHER || publisher.getRole() == Role.ADMIN)) {
@@ -40,10 +38,8 @@ public class EventServiceImpl implements EventService {
 
         event.setPublisher(publisher);
         event.setActive(true);
-
         return eventRepository.save(event);
     }
-
 
     @Override
     public Event updateEvent(Long id, Event updated) {
