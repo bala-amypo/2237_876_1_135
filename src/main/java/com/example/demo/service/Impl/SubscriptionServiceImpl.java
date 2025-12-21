@@ -9,7 +9,8 @@ import com.example.demo.repository.SubscriptionRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.SubscriptionService;
 import org.springframework.stereotype.Service;
-import org.springframework.http.HttpMethod;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
