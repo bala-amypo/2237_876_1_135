@@ -22,7 +22,7 @@ public class Event {
     private Instant createdAt;
     private Instant lastUpdatedAt;
 
-
+    
     public void onCreate() {
         this.createdAt = Instant.now();
         this.lastUpdatedAt = Instant.now();
