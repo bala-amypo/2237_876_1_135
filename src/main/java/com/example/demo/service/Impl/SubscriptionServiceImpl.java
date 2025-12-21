@@ -36,8 +36,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                 "Already subscribed"
             );
         }
-
-
+        
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
