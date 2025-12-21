@@ -15,6 +15,7 @@ public class Subscription {
     private Event event;
     private Instant subscribedAt;
 
+    @PrePersist
     public void onCreate() {
         this.subscribedAt = Instant.now();
     }
