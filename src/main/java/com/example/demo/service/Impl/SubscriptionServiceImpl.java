@@ -9,6 +9,7 @@ import com.example.demo.repository.SubscriptionRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.SubscriptionService;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpMethod;
 
 import java.util.List;
 
