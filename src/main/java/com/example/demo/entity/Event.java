@@ -2,10 +2,12 @@ package com.example.demo.entity;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
 @Entity
-
+@JsonIgnoreProperties(value = {"publisher"}, allowSetters = true)
 public class Event {
     @Id
     private Long id;
