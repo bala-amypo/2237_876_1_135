@@ -18,14 +18,18 @@ public class SubscriptionController {
     }
 
     @PostMapping("/{eventId}")
-    public Subscription subscribe(@Requestbody Long userId,
-                                  @PathVariable Long eventId) {
+    public Subscription subscribe(
+            @RequestParam Long userId,     // ✅ FROM ?userId=1
+            @PathVariable Long eventId     // ✅ FROM /1
+    ) {
         return subscriptionService.subscribe(userId, eventId);
     }
 
     @DeleteMapping("/{eventId}")
-    public void unsubscribe(@RequestParam Long userId,
-                            @PathVariable Long eventId) {
+    public void unsubscribe(
+            @RequestParam Long userId,
+            @PathVariable Long eventId
+    ) {
         subscriptionService.unsubscribe(userId, eventId);
     }
 
