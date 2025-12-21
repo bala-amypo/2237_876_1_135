@@ -8,6 +8,7 @@ import com.example.demo.repository.EventRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.EventService;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
