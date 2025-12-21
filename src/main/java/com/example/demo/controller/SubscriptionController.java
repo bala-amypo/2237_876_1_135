@@ -4,7 +4,6 @@ import com.example.demo.entity.Subscription;
 import com.example.demo.service.SubscriptionService;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 
 @RestController
