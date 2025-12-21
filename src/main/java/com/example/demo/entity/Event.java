@@ -5,6 +5,7 @@ import java.time.Instant;
 import jakarta.persistence.*;
 
 @Entity
+
 public class Event {
     @Id
     private Long id;
