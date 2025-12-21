@@ -22,13 +22,13 @@ public class Event {
     private Instant createdAt;
     private Instant lastUpdatedAt;
 
-    
+    @PrePersist 
     public void onCreate() {
         this.createdAt = Instant.now();
         this.lastUpdatedAt = Instant.now();
         this.isActive = true;
     }
-
+    @PreUpdate 
     public void onUpdate() {
         this.lastUpdatedAt = Instant.now();
     }

@@ -9,10 +9,16 @@ public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    @ManyToOne
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
+
+    @Column(nullable = false)
     private Instant subscribedAt;
 
     @PrePersist
