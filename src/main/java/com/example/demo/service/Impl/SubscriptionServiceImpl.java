@@ -31,8 +31,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public Subscription subscribe(Long userId, Long eventId) {
 
         if (subscriptionRepository.existsByUserIdAndEventId(userId, eventId)) {
-            throw new IllegalArgumentException("Already subscribed");
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Already subscribed"
+            );
         }
+
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
