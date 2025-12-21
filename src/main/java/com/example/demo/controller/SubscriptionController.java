@@ -17,7 +17,7 @@ public class SubscriptionController {
     }
 
     @PostMapping("/{eventId}")
-    public Subscription subscribe(@RequestParam Long userId,
+    public Subscription subscribe(@Requestbody Long userId,
                                   @PathVariable Long eventId) {
         return subscriptionService.subscribe(userId, eventId);
     }
