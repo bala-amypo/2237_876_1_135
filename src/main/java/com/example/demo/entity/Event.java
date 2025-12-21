@@ -2,11 +2,15 @@ package com.example.demo.entity;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
 @Entity
+@JsonIgnoreProperties(value = {"id"}, allowSetters = true)
 public class Event {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private User publisher;
