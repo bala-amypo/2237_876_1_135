@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Event;
 import com.example.demo.entity.Subscription;
 import com.example.demo.entity.User;
+import com.example.demo.entity.Role;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.EventRepository;
 import com.example.demo.repository.SubscriptionRepository;
@@ -46,9 +47,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found"));
 
-        if ("PUBLISHER".equalsIgnoreCase(user.getRole())) {
+        if (user.getRole() == Role.PUBLISHER) {
             throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
+                    HttpStatus.FORBIDDEN,
                     "Publisher cannot subscribe the event"
             );
         }
