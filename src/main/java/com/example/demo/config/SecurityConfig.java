@@ -43,6 +43,18 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/events/**").permitAll()
                 .anyRequest().permitAll()
             )
+            .authorizeHttpRequests(auth -> auth
+    .requestMatchers("/auth/**").permitAll()
+    .requestMatchers(
+        "/v3/api-docs/**",
+        "/swagger-ui/**",
+        "/swagger-ui.html"
+    ).permitAll()
+    .requestMatchers(HttpMethod.GET, "/api/events/**").permitAll()
+    .requestMatchers(HttpMethod.POST, "/api/subscriptions/**").authenticated()
+    .anyRequest().authenticated()
+)
+
             .addFilterBefore(
                 jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class
