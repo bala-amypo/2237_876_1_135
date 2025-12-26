@@ -36,7 +36,6 @@ public class EventController {
     }
 
     @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
-    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
     public List<Event> getActive() {
         return eventService.getActiveEvents();
     }
