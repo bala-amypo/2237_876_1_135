@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Subscription;
 import com.example.demo.service.SubscriptionService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class SubscriptionController {
         this.subscriptionService = subscriptionService;
     }
 
+    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
     @PostMapping("/{eventId}")
     public Subscription subscribe(
             @RequestParam Long userId,     // ✅ FROM ?userId=1
@@ -24,6 +26,8 @@ public class SubscriptionController {
         return subscriptionService.subscribe(userId, eventId);
     }
 
+
+    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
     @DeleteMapping("/{eventId}")
     public void unsubscribe(
             @RequestParam Long userId,
@@ -32,11 +36,13 @@ public class SubscriptionController {
         subscriptionService.unsubscribe(userId, eventId);
     }
 
+    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
     @GetMapping("/user/{userId}")
     public List<Subscription> getForUser(@PathVariable Long userId) {
         return subscriptionService.getUserSubscriptions(userId);
     }
 
+    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
     @GetMapping("/check/{userId}/{eventId}")
     public boolean check(@PathVariable Long userId,
                          @PathVariable Long eventId) {
