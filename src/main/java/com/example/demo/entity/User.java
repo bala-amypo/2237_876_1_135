@@ -15,11 +15,11 @@ public class User {
     private String fullName;
 
     @NotBlank(message = "Email is required")
+    @Column(unique = true, nullable = false)
     @Email(
         regexp = "^[a-z0-9+_.-]+@(.+)$",
         message = "Email format not accepted"
     )
-    @Column(unique = true, nullable = false)
     private String email;
 
     private String password;
