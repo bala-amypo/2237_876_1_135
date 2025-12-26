@@ -20,8 +20,8 @@ public class SubscriptionController {
     @PreAuthorize("hasAnyRole('SUBSCRIBER','ADMIN')")
     @PostMapping("/{eventId}")
     public Subscription subscribe(
-            @RequestParam Long userId,     // ✅ FROM ?userId=1
-            @PathVariable Long eventId     // ✅ FROM /1
+            @RequestParam Long userId,
+            @PathVariable Long eventId
     ) {
         return subscriptionService.subscribe(userId, eventId);
     }
