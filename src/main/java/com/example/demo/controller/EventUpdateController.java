@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.EventUpdate;
 import com.example.demo.service.EventUpdateService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
