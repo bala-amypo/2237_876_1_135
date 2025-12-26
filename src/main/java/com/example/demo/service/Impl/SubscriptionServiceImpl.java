@@ -83,45 +83,17 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public List<Subscription> getSubscriptionsForUser(Long userId) {
-
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        
-        if (user.getRole() == Role.PUBLISHER) {
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN,
-                    "Publisher cannot subscribe the event"
-            );
-        }
-
         return subscriptionRepository.findByUserId(userId);
     }
 
     @Override
     public List<Subscription> getUserSubscriptions(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         
-        if (user.getRole() == Role.PUBLISHER) {
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN,
-                    "Publisher cannot subscribe the event"
-            );
-        }
         return subscriptionRepository.findByUserId(userId);
     }
 
     @Override
     public boolean isSubscribed(Long userId, Long eventId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        
-        if (user.getRole() == Role.PUBLISHER) {
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN,
-                    "Publisher cannot subscribe the event"
-            );
-        }
         return subscriptionRepository.existsByUserIdAndEventId(userId, eventId);
     }
 }
