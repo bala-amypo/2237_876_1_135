@@ -48,6 +48,11 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
 
+            .exceptionHandling(ex -> ex
+            .authenticationEntryPoint(new JwtAuthenticationEntryPoint()) // 401
+            .accessDeniedHandler(customAccessDeniedHandler)              // 403
+        )
+
             .addFilterBefore(
                 jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class
