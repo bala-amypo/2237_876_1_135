@@ -27,7 +27,7 @@ public class SubscriptionController {
     }
 
 
-    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
+    @PreAuthorize("hasAnyRole('SUBSCRIBER','ADMIN')")
     @DeleteMapping("/{eventId}")
     public void unsubscribe(
             @RequestParam Long userId,
@@ -36,13 +36,13 @@ public class SubscriptionController {
         subscriptionService.unsubscribe(userId, eventId);
     }
 
-    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
+    @PreAuthorize("hasAnyRole('SUBSCRIBER','ADMIN')")
     @GetMapping("/user/{userId}")
     public List<Subscription> getForUser(@PathVariable Long userId) {
         return subscriptionService.getUserSubscriptions(userId);
     }
 
-    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
+    @PreAuthorize("hasAnyRole('SUBSCRIBER','ADMIN')")
     @GetMapping("/check/{userId}/{eventId}")
     public boolean check(@PathVariable Long userId,
                          @PathVariable Long eventId) {
