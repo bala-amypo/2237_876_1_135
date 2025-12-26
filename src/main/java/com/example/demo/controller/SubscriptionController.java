@@ -17,7 +17,7 @@ public class SubscriptionController {
         this.subscriptionService = subscriptionService;
     }
 
-    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
+    @PreAuthorize("hasAnyRole('SUBSCRIBER','ADMIN')")
     @PostMapping("/{eventId}")
     public Subscription subscribe(
             @RequestParam Long userId,     // ✅ FROM ?userId=1

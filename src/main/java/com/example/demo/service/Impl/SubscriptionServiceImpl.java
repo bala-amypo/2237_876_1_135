@@ -63,6 +63,17 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public void unsubscribe(Long userId, Long eventId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        
+        if (user.getRole() == Role.PUBLISHER) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Publisher cannot subscribe the event"
+            );
+        }
+        
         Subscription subscription = subscriptionRepository
                 .findByUserIdAndEventId(userId, eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Subscription not found"));
