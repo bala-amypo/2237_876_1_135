@@ -43,8 +43,6 @@ public class SecurityConfig {
                     "/swagger-ui/**",
                     "/swagger-ui.html"
                 ).permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/events/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/subscriptions/**").authenticated()
                 .anyRequest().authenticated()
             )
 
