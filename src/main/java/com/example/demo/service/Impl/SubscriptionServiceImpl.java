@@ -8,10 +8,13 @@ import com.example.demo.repository.EventRepository;
 import com.example.demo.repository.SubscriptionRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.SubscriptionService;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,24 +25,53 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     private final UserRepository userRepository;
     private final EventRepository eventRepository;
 
-    public SubscriptionServiceImpl(SubscriptionRepository subscriptionRepository,
-                                   UserRepository userRepository,
-                                   EventRepository eventRepository) {
+    public SubscriptionServiceImpl(
+            SubscriptionRepository subscriptionRepository,
+            UserRepository userRepository,
+            EventRepository eventRepository) {
+
         this.subscriptionRepository = subscriptionRepository;
         this.userRepository = userRepository;
         this.eventRepository = eventRepository;
     }
 
+    // 🔐 ROLE CHECK METHOD
+    private void validateUserRole() {
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || authentication.getAuthorities() == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED,
+                    "Unauthorized"
+            );
+        }
+
+        boolean isPublisher = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch(role -> role.equals("ROLE_PUBLISHER"));
+
+        if (isPublisher) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Publishers are not allowed to subscribe"
+            );
+        }
+    }
+
     @Override
     public Subscription subscribe(Long userId, Long eventId) {
 
+        // 🔐 CHECK ROLE FIRST
+        validateUserRole();
+
         if (subscriptionRepository.existsByUserIdAndEventId(userId, eventId)) {
             throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST,
-                "Already subscribed"
+                    HttpStatus.BAD_REQUEST,
+                    "Already subscribed"
             );
         }
-        
+
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
@@ -55,6 +87,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public void unsubscribe(Long userId, Long eventId) {
+
+        // 🔐 CHECK ROLE
+        validateUserRole();
+
         Subscription subscription = subscriptionRepository
                 .findByUserIdAndEventId(userId, eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Subscription not found"));
