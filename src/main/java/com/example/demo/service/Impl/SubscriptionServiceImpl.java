@@ -46,10 +46,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found"));
 
-        if((userRepository.findByRole(userId)).equals("PUBLISHER")) {
+        if ("PUBLISHER".equalsIgnoreCase(user.getRole())) {
             throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST,
-                "Publisher cannot subscribe the event"
+                    HttpStatus.BAD_REQUEST,
+                    "Publisher cannot subscribe the event"
             );
         }
 
