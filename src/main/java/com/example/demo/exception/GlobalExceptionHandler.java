@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
                 .body("Access denied: insufficient permissions");
     }
 
-    // ✅ ADD THIS: IllegalArgumentException → 400
+    //  IllegalArgumentException → 400
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, String>> handleIllegalArgument(
             IllegalArgumentException ex) {
