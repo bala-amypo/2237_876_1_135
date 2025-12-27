@@ -17,16 +17,19 @@ public class EventUpdateController {
         this.updateService = updateService;
     }
 
+    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
     @PostMapping
     public EventUpdate publish(@RequestBody EventUpdate update) {
         return updateService.publishUpdate(update);
     }
 
+    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
     @GetMapping("/event/{eventId}")
     public List<EventUpdate> getForEvent(@PathVariable Long eventId) {
         return updateService.getUpdatesForEvent(eventId);
     }
 
+    @PreAuthorize("hasAnyRole('PUBLISHER','ADMIN')")
     @GetMapping("/{id}")
     public EventUpdate get(@PathVariable Long id) {
         return updateService.getUpdateById(id);
