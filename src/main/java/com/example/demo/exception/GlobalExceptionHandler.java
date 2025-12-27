@@ -57,7 +57,7 @@ public class GlobalExceptionHandler {
                 .body(Map.of("error", ex.getMessage()));
     }
 
-    // ✅ ADD THIS: ResourceNotFoundException → 404
+    // ResourceNotFoundException → 404
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Map<String, String>> handleResourceNotFound(
             ResourceNotFoundException ex) {
